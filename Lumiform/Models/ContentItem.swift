@@ -7,11 +7,44 @@
 
 import Foundation
 
-struct ContentItem: Identifiable, Decodable {
+struct ContentItem: Identifiable, Codable {
     let id: UUID = UUID()
     let type: ContentItemType
     let title: String
     let items: [ContentItem]?
+    
+    enum CodingKeys: String, CodingKey {
+        case type
+        case title
+        case items
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(title, forKey: .title)
+        
+        switch type {
+        case .page:
+            try container.encode("page", forKey: .type)
+        case .section:
+            try container.encode("section", forKey: .type)
+        case .question(let questionType):
+            switch questionType {
+            case .text:
+                try container.encode("text", forKey: .type)
+            case .image(_, let src):
+                try container.encode("image", forKey: .type)
+                var container = encoder.container(keyedBy: QuestionCodingKeys.self)
+                try container.encode(src.absoluteString, forKey: .src)
+            }
+        }
+        
+        try container.encodeIfPresent(items, forKey: .items)
+    }
+    
+    private enum QuestionCodingKeys: String, CodingKey {
+        case src
+    }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -33,13 +66,6 @@ struct ContentItem: Identifiable, Decodable {
         }
         
         self.items = try container.decodeIfPresent([ContentItem].self, forKey: .items)
-    }
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case type
-        case title
-        case items
     }
 }
 

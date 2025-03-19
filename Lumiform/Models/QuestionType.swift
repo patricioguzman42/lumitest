@@ -17,6 +17,20 @@ enum QuestionType: Decodable {
         case src
     }
     
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        switch self {
+        case .text(let title):
+            try container.encode("text", forKey: .type)
+            try container.encode(title, forKey: .title)
+        case .image(let title, let src):
+            try container.encode("image", forKey: .type)
+            try container.encode(title, forKey: .title)
+            try container.encode(src.absoluteString, forKey: .src)
+        }
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let type = try container.decode(String.self, forKey: .type)

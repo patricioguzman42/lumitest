@@ -13,8 +13,12 @@ struct LumiformApp: App {
     
     init() {
         let networkService = NetworkService()
+        let cacheService = CacheService()
+        let reachabilityService = ReachabilityService()
         let repository = ContentRepository(
-            networkService: networkService
+            networkService: networkService,
+            cacheService: cacheService,
+            reachabilityService: reachabilityService
         )
         _contentViewModel = StateObject(wrappedValue: ContentViewModel(repository: repository))
     }

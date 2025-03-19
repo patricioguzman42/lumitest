@@ -7,8 +7,25 @@
 
 import Foundation
 
-enum ContentItemType: Decodable {
+enum ContentItemType: Codable {
     case page
     case section
     case question(QuestionType)
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: TypeCodingKeys.self)
+        
+        switch self {
+        case .page:
+            try container.encode("page", forKey: .type)
+        case .section:
+            try container.encode("section", forKey: .type)
+        case .question:
+            try container.encode("text", forKey: .type)
+        }
+    }
+    
+    private enum TypeCodingKeys: String, CodingKey {
+        case type
+    }
 }

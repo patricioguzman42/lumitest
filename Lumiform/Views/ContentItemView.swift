@@ -12,29 +12,16 @@ struct ContentItemView: View {
     let nestingLevel: Int
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            if item.isPage || item.isSection {
-                headerView
-                
-                if let items = item.items, !items.isEmpty {
-                    ForEach(items) { subItem in
-                        ContentItemView(item: subItem, nestingLevel: nestingLevel + 1)
-                            .padding(.leading, 16)
-                    }
-                }
-            } else if item.isQuestion {
-                questionView
-            }
+        if item.isPage || item.isSection {
+            Text(item.title)
+                .font(fontForItem)
+                .fontWeight(item.isPage ? .bold : .semibold)
+                .padding(.vertical, 4)
+        } else if item.isQuestion {
+            questionView
         }
     }
-    
-    private var headerView: some View {
-        Text(item.title)
-            .font(fontForItem)
-            .fontWeight(item.isPage ? .bold : .semibold)
-            .padding(.vertical, 4)
-    }
-    
+
     private var questionView: some View {
         VStack(alignment: .leading, spacing: 4) {
             if item.isImageQuestion {

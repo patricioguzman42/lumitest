@@ -22,7 +22,6 @@ class ReachabilityService: ReachabilityServiceProtocol {
     func startMonitoring() {
         monitor.pathUpdateHandler = { [weak self] path in
             DispatchQueue.main.async {
-                print(path.status)
                 self?.isConnected = path.status == .satisfied
             }
         }

@@ -37,7 +37,18 @@ struct ContentListView: View {
     }
     
     private func contentList(_ items: [ContentItem]) -> some View {
-        Text("list")
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                ForEach(items) { item in
+                    ContentItemView(item: item, nestingLevel: 0)
+                        .padding(.horizontal)
+                }
+            }
+            .padding(.vertical)
+        }
+        .refreshable {
+            await viewModel.refreshContent()
+        }
     }
     
     private func refreshContent() {

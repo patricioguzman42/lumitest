@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-@main
 struct LumiformApp: App {
     @StateObject var contentViewModel: ContentViewModel
     

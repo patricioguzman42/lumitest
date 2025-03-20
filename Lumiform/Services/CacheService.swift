@@ -14,8 +14,22 @@ protocol CacheServiceProtocol {
 }
 
 class CacheService: CacheServiceProtocol {
-    private let fileManager = FileManager.default
-    private let cacheFileName = "content_cache.json"
+    private let fileManager: FileManager
+    private let cacheFileName: String
+    private let encoder: JSONEncoder
+    private let decoder: JSONDecoder
+    
+    init(
+        fileManager: FileManager = .default,
+        cacheFileName: String = "content_cache.json",
+        encoder: JSONEncoder = JSONEncoder(),
+        decoder: JSONDecoder = JSONDecoder()
+    ) {
+        self.fileManager = fileManager
+        self.cacheFileName = cacheFileName
+        self.encoder = encoder
+        self.decoder = decoder
+    }
     
     private var cacheURL: URL? {
         fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first?.appendingPathComponent(cacheFileName)
@@ -26,8 +40,16 @@ class CacheService: CacheServiceProtocol {
             throw CacheError.invalidCacheURL
         }
         
-        let data = try JSONEncoder().encode(content)
-        try data.write(to: url)
+        do {
+            let data = try encoder.encode(content)
+            try data.write(to: url, options: .atomic)
+            
+            guard fileManager.fileExists(atPath: url.path) else {
+                throw CacheError.saveFailed
+            }
+        } catch {
+            throw CacheError.saveFailed
+        }
     }
     
     func loadContent() throws -> [ContentItem] {
@@ -35,9 +57,14 @@ class CacheService: CacheServiceProtocol {
             throw CacheError.invalidCacheURL
         }
         
+        guard fileManager.fileExists(atPath: url.path) else {
+            throw CacheError.loadFailed
+        }
+        
         do {
             let data = try Data(contentsOf: url)
-            return try JSONDecoder().decode([ContentItem].self, from: data)
+            let content = try decoder.decode([ContentItem].self, from: data)
+            return content
         } catch {
             throw CacheError.loadFailed
         }

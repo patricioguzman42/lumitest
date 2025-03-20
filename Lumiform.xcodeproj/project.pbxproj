@@ -40,11 +40,6 @@
 			path = LumiformTests;
 			sourceTree = "<group>";
 		};
-		C195680A2D8AB63300A20BEC /* LumiformUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = LumiformUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +72,6 @@
 			children = (
 				C19567EF2D8AB62F00A20BEC /* Lumiform */,
 				C19568002D8AB63200A20BEC /* LumiformTests */,
-				C195680A2D8AB63300A20BEC /* LumiformUITests */,
 				C19567EE2D8AB62F00A20BEC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -152,9 +146,6 @@
 			);
 			dependencies = (
 				C19568092D8AB63300A20BEC /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				C195680A2D8AB63300A20BEC /* LumiformUITests */,
 			);
 			name = LumiformUITests;
 			packageProductDependencies = (

@@ -60,6 +60,22 @@ The project includes:
 - Mock implementations for dependency isolation
 - Network error simulation and state management testing
 
+## Future Improvements
+
+### Modularization
+- Extract services into a separate module for better isolation and reusability
+- Create a dedicated networking module
+- Separate UI components into a design system module
+
+### Performance
+- Implement image caching and preloading
+- Add pagination for large content hierarchies
+
+### Developer Experience
+- Add SwiftLint for code style consistency
+- Implement CI/CD pipeline
+- Add documentation generation
+
 ## Installation
 
 1. Clone the repository

@@ -40,18 +40,28 @@ struct ContentItemView: View {
                         switch phase {
                         case .empty:
                             ProgressView()
+                                .frame(height: 120)
+                                .frame(maxWidth: .infinity)
+                                .background(Color.gray.opacity(0.1))
+                                .cornerRadius(8)
                         case .success(let image):
                             image
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(height: 120)
+                                .frame(maxWidth: .infinity)
+                                .background(Color.gray.opacity(0.1))
                                 .cornerRadius(8)
+                                .transition(.opacity.animation(.easeInOut(duration: 0.3)))
                         case .failure:
                             Image(systemName: "photo")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(height: 120)
+                                .frame(maxWidth: .infinity)
+                                .background(Color.gray.opacity(0.1))
                                 .foregroundColor(.gray)
+                                .cornerRadius(8)
                         @unknown default:
                             EmptyView()
                         }

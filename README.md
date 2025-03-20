@@ -4,10 +4,10 @@ A native iOS application that fetches, parses, and displays a JSON hierarchy com
 
 ## 📋 Table of Contents
 - [Features](#-features)
-- [Architecture](#-architecture)
+- [Architecture](#️-architecture)
 - [Testing](#-testing)
 - [Future Improvements](#-future-improvements)
-- [Installation](#-installation)
+- [Installation](#️-installation)
 - [API Endpoint](#-api-endpoint)
 
 ## ✨ Features

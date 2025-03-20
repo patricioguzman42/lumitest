@@ -13,10 +13,13 @@ struct ContentItemView: View {
     
     var body: some View {
         if item.isPage || item.isSection {
-            Text(item.title)
-                .font(fontForItem)
-                .fontWeight(item.isPage ? .bold : .semibold)
-                .padding(.vertical, 4)
+            HStack(spacing: 8) {
+                Text(iconForType)
+                Text(item.title)
+                    .font(fontForItem)
+                    .fontWeight(item.isPage ? .bold : .semibold)
+            }
+            .padding(.vertical, 4)
         } else if item.isQuestion {
             questionView
         }
@@ -25,15 +28,21 @@ struct ContentItemView: View {
     private var questionView: some View {
         VStack(alignment: .leading, spacing: 4) {
             if item.isImageQuestion {
-                Text(item.title)
-                    .font(.subheadline)
-                    .foregroundColor(.primary)
+                HStack(spacing: 8) {
+                    Text("🖼️")
+                    Text(item.title)
+                        .font(.subheadline)
+                        .foregroundColor(.primary)
+                }
             }
             
             if item.isTextQuestion, let text = item.questionTitle {
-                Text(text)
-                    .font(.body)
-                    .foregroundColor(.primary)
+                HStack(spacing: 8) {
+                    Text("📝")
+                    Text(text)
+                        .font(.body)
+                        .foregroundColor(.primary)
+                }
             } else if item.isImageQuestion, let imageURL = item.questionImageURL {
                 NavigationLink(destination: ImageDetailView(title: item.title, imageURL: imageURL)) {
                     AsyncImage(url: imageURL) { phase in
@@ -69,6 +78,19 @@ struct ContentItemView: View {
                 }
             }
         }
+    }
+    
+    private var iconForType: String {
+        if item.isPage {
+            return "📄"
+        } else if item.isSection {
+            switch nestingLevel {
+            case 0: return "📁"
+            case 1: return "📂"
+            default: return "📑"
+            }
+        }
+        return ""
     }
     
     private var fontForItem: Font {

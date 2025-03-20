@@ -42,7 +42,9 @@ struct ContentListView: View {
         }
         .listStyle(.sidebar)
         .refreshable {
-            await viewModel.refreshContent()
+            await Task {
+                await viewModel.refreshContent()
+            }.value
         }
     }
     

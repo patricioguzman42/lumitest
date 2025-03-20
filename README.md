@@ -3,12 +3,12 @@
 A native iOS application that fetches, parses, and displays a JSON hierarchy composed of Pages, Sections, and Questions. The app presents the content visually in a way that reflects its hierarchical relationships using varying font sizes, icons, and interactive elements for images.
 
 ## 📋 Table of Contents
-- [Features](#features)
-- [Architecture](#architecture)
-- [Testing](#testing)
-- [Future Improvements](#future-improvements)
-- [Installation](#installation)
-- [API Endpoint](#api-endpoint)
+- [Features](#-features)
+- [Architecture](#-architecture)
+- [Testing](#-testing)
+- [Future Improvements](#-future-improvements)
+- [Installation](#-installation)
+- [API Endpoint](#-api-endpoint)
 
 ## ✨ Features
 

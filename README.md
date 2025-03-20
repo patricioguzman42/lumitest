@@ -1,8 +1,16 @@
-# Lumiform iOS App
+# 📱 Lumiform iOS App
 
 A native iOS application that fetches, parses, and displays a JSON hierarchy composed of Pages, Sections, and Questions. The app presents the content visually in a way that reflects its hierarchical relationships using varying font sizes, icons, and interactive elements for images.
 
-## Features
+## 📋 Table of Contents
+- [Features](#features)
+- [Architecture](#architecture)
+- [Testing](#testing)
+- [Future Improvements](#future-improvements)
+- [Installation](#installation)
+- [API Endpoint](#api-endpoint)
+
+## ✨ Features
 
 - Hierarchical content display with intuitive visual indicators
 - Dynamic font sizing based on content hierarchy
@@ -24,7 +32,7 @@ A native iOS application that fetches, parses, and displays a JSON hierarchy com
 - Pull-to-refresh functionality
 - Loading state indicators
 
-## Architecture
+## 🏗️ Architecture
 
 The app follows the MVVM (Model-View-ViewModel) architecture pattern with the following components:
 
@@ -51,7 +59,7 @@ The app follows the MVVM (Model-View-ViewModel) architecture pattern with the fo
 ### Repositories
 - `ContentRepository`: Coordinates between network and cache services, handles offline/online switching
 
-## Testing
+## 🧪 Testing
 
 The project includes:
 - Unit tests using Swift's latest Testing framework (@Test macro)
@@ -60,29 +68,29 @@ The project includes:
 - Mock implementations for dependency isolation
 - Network error simulation and state management testing
 
-## Future Improvements
+## 🚀 Future Improvements
 
-### Modularization
+### 📦 Modularization
 - Extract services into a separate module for better isolation and reusability
 - Create a dedicated networking module
 - Separate UI components into a design system module
 
-### Performance
+### ⚡️ Performance
 - Implement image caching and preloading
 - Add pagination for large content hierarchies
 
-### Developer Experience
+### 👩‍💻 Developer Experience
 - Add SwiftLint for code style consistency
 - Implement CI/CD pipeline
 - Add documentation generation
 
-## Installation
+## 🛠️ Installation
 
 1. Clone the repository
 2. Open `Lumiform.xcodeproj` in Xcode
 3. Build and run the project
 
-## API Endpoint
+## 🔌 API Endpoint
 
 The app fetches data from:
 ```

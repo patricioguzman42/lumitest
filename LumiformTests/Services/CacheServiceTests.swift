@@ -31,16 +31,12 @@ class CacheServiceTests {
     }
     
     @Test func saveContent_ValidContent_SavesSuccessfully() async throws {
-        print("\n🧪 Starting saveContent_ValidContent_SavesSuccessfully test")
         let testItem = try ContentItem(title: "Test Item")
         let items = [testItem]
         
-        print("📦 Test item created: \(testItem)")
         try cacheService.saveContent(items)
-        print("🔍 Attempting to load saved content")
         let loadedContent = try cacheService.loadContent()
         
-        print("📊 Loaded content count: \(loadedContent.count)")
         #expect(!loadedContent.isEmpty)
         #expect(loadedContent.count == 1)
         #expect(loadedContent[0].title == testItem.title)
